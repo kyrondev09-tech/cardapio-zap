@@ -1,0 +1,21 @@
+export * from './types';
+export * from './config';
+export * from './data/products';
+export * from './utils/pricing';
+export * from './utils/scheduling';
+export * from './utils/validation';
+export * from './utils/storage';
+export * from './utils/whatsapp';
+export * from './utils/image';
+export * from './actions/reveal';
+export * from './actions/dialog';
+
+export { default as Header } from './components/Header.svelte';
+export { default as Hero } from './components/Hero.svelte';
+export { default as Catalog } from './components/Catalog.svelte';
+export { default as ProductCard } from './components/ProductCard.svelte';
+export { default as ProductModal } from './components/ProductModal.svelte';
+export { default as Cart } from './components/Cart.svelte';
+export { default as Checkout } from './components/Checkout.svelte';
+export { default as Toast } from './components/Toast.svelte';
+export { default as Footer } from './components/Footer.svelte';

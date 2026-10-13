@@ -1,0 +1,491 @@
+@import 'tailwindcss';
+
+:root {
+	color-scheme: dark;
+
+	/* Superfícies */
+	--bg: #121110;
+	--surface: #1b1a18;
+	--surface-2: #23211f;
+	--surface-3: #2c2a27;
+	--border: #2e2b28;
+	--border-strong: #5c574f;
+
+	/* Texto */
+	--text: #f6f1e7;
+	--text-light: #b8afa1;
+	--text-muted: #948b7e;
+
+	/* Destaque */
+	/* Destaque: vermelho pimenta. Toda a cor de marca da interface sai destas variáveis. */
+	--accent: #e53935; /* preenchimentos, bordas, ícones, foco e títulos grandes */
+	--accent-hover: #c62828; /* hover dos preenchimentos */
+	--accent-text: #ff6f66; /* texto pequeno sobre fundo escuro (preços, links, rótulos) */
+	--accent-ink: #1a0504; /* texto sobre --accent (4.7:1) */
+	--accent-hover-ink: #ffffff; /* texto sobre --accent-hover (5.6:1) */
+	--accent-soft: rgba(229, 57, 53, 0.14); /* fundos discretos */
+	--accent-line: rgba(229, 57, 53, 0.55); /* bordas discretas */
+
+	/* Estados */
+	--error: #ff9484;
+	--error-bg: rgba(255, 107, 90, 0.12);
+	--error-line: rgba(255, 148, 132, 0.4);
+	--success: #74d391;
+	--success-bg: rgba(116, 211, 145, 0.12);
+	--whatsapp: #25d366;
+	--whatsapp-hover: #3be07a;
+	--whatsapp-ink: #04200e;
+
+	--font-display: 'Oswald', 'Arial Narrow', 'Roboto Condensed', 'Helvetica Neue', sans-serif;
+	--font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+	--radius-sm: 10px;
+	--radius: 14px;
+	--radius-lg: 20px;
+	--shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+	--shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.55);
+	--max-w: 1160px;
+	--header-h: 68px;
+	--ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+/* Cabeçalho com duas linhas (marca + busca) em telas estreitas */
+@media (max-width: 720px) {
+	:root {
+		--header-h: 119px;
+	}
+}
+
+html {
+	scrollbar-gutter: stable;
+	background-color: var(--bg);
+}
+
+body {
+	margin: 0;
+	font-family: var(--font-body);
+	background-color: var(--bg);
+	color: var(--text);
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	padding-bottom: env(safe-area-inset-bottom);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+	margin: 0;
+}
+
+button {
+	font-family: inherit;
+	cursor: pointer;
+	border: none;
+	background: none;
+	color: inherit;
+}
+
+input,
+textarea,
+select {
+	font-family: inherit;
+}
+
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+::selection {
+	background: var(--accent);
+	color: var(--accent-ink);
+}
+
+.app-container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-height: 100dvh;
+}
+
+/* Trava a rolagem da página enquanto um modal ou o carrinho mobile estiver aberto */
+html:has(.modal) {
+	overflow: hidden;
+}
+
+@media (max-width: 991px) {
+	html:has(.cart-drawer) {
+		overflow: hidden;
+	}
+}
+
+.display {
+	font-family: var(--font-display);
+	font-weight: 600;
+	letter-spacing: 0.01em;
+	text-transform: uppercase;
+	line-height: 1.1;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Botões */
+.btn {
+	min-height: 48px;
+	padding: 12px 24px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 1rem;
+	line-height: 1.2;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	transition:
+		background-color 0.2s,
+		border-color 0.2s,
+		color 0.2s,
+		transform 0.2s var(--ease);
+}
+
+.btn:active:not(:disabled) {
+	transform: scale(0.98);
+}
+
+.btn:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.btn-primary {
+	background: var(--accent);
+	color: var(--accent-ink);
+}
+
+.btn-secondary {
+	border: 1px solid var(--border-strong);
+	color: var(--text);
+}
+
+.btn-outline {
+	border: 1px solid var(--accent-line);
+	color: var(--accent-text);
+}
+
+.btn-text {
+	color: var(--text-light);
+	min-height: 44px;
+	padding: 8px 12px;
+	font-weight: 600;
+}
+
+.btn-block {
+	width: 100%;
+}
+
+.btn-whatsapp {
+	background: var(--whatsapp);
+	color: var(--whatsapp-ink);
+}
+
+@media (hover: hover) {
+	.btn-primary:hover:not(:disabled) {
+		background: var(--accent-hover);
+		color: var(--accent-hover-ink);
+		transform: translateY(-1px);
+	}
+
+	.btn-secondary:hover:not(:disabled) {
+		border-color: var(--text-light);
+		background: rgba(255, 255, 255, 0.04);
+	}
+
+	.btn-outline:hover:not(:disabled) {
+		background: var(--accent-soft);
+		border-color: var(--accent);
+		color: var(--text);
+	}
+
+	.btn-text:hover:not(:disabled) {
+		color: var(--text);
+	}
+
+	.btn-whatsapp:hover:not(:disabled) {
+		background: var(--whatsapp-hover);
+		transform: translateY(-1px);
+	}
+}
+
+.icon-btn {
+	width: 44px;
+	height: 44px;
+	flex: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	color: var(--text-light);
+	transition:
+		background-color 0.2s,
+		color 0.2s;
+}
+
+@media (hover: hover) {
+	.icon-btn:hover {
+		background: var(--surface-3);
+		color: var(--text);
+	}
+}
+
+/* Campos de formulário */
+.control {
+	display: block;
+	width: 100%;
+	min-height: 48px;
+	padding: 12px 14px;
+	background: var(--surface-2);
+	border: 1px solid var(--border-strong);
+	border-radius: var(--radius-sm);
+	color: var(--text);
+	font-size: 1rem;
+	line-height: 1.4;
+	transition:
+		border-color 0.2s,
+		background-color 0.2s;
+}
+
+textarea.control {
+	resize: vertical;
+	min-height: 76px;
+}
+
+.control::placeholder {
+	color: var(--text-muted);
+	opacity: 1;
+}
+
+.control:focus-visible {
+	outline-offset: 0;
+	border-color: var(--accent);
+	background: var(--surface-3);
+}
+
+.control:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+/* Alternador Entrega / Retirada */
+.segmented {
+	display: flex;
+	gap: 4px;
+	padding: 4px;
+	background: var(--surface-2);
+	border: 1px solid var(--border);
+	border-radius: 999px;
+}
+
+.segmented button {
+	flex: 1;
+	min-height: 40px;
+	padding: 8px 12px;
+	border-radius: 999px;
+	font-weight: 600;
+	color: var(--text-light);
+	transition:
+		background-color 0.2s,
+		color 0.2s;
+}
+
+.segmented button[aria-pressed='true'] {
+	background: var(--accent);
+	color: var(--accent-ink);
+}
+
+@media (hover: hover) {
+	.segmented button[aria-pressed='false']:hover {
+		color: var(--text);
+		background: var(--surface-3);
+	}
+}
+
+/* Controle de quantidade */
+.qty-control {
+	display: inline-flex;
+	align-items: center;
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	background: var(--surface-2);
+}
+
+.qty-control button {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	font-size: 1.25rem;
+	line-height: 1;
+	color: var(--accent-text);
+	transition: background-color 0.2s;
+}
+
+.qty-control span {
+	min-width: 28px;
+	text-align: center;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+}
+
+.qty-control.large button {
+	width: 48px;
+	height: 48px;
+	font-size: 1.5rem;
+}
+
+.qty-control.large span {
+	min-width: 36px;
+	font-size: 1.1rem;
+}
+
+@media (hover: hover) {
+	.qty-control button:hover {
+		background: var(--surface-3);
+	}
+}
+
+/* Modais */
+.modal-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(8, 7, 6, 0.72);
+	z-index: 110;
+	backdrop-filter: blur(3px);
+	animation: fade-in 0.2s ease both;
+}
+
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+	z-index: 111;
+	width: 92%;
+	max-height: 90vh;
+	max-height: 90dvh;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius-lg);
+	box-shadow: var(--shadow-modal);
+	animation: modal-in 0.28s var(--ease) both;
+}
+
+.modal:focus {
+	outline: none;
+}
+
+@media (max-width: 768px) {
+	.modal {
+		inset: 0;
+		translate: none;
+		width: 100%;
+		max-width: 100%;
+		height: 100vh;
+		height: 100dvh;
+		max-height: none;
+		border: none;
+		border-radius: 0;
+		animation-name: sheet-in;
+	}
+}
+
+/* Animações (o estado final é sempre o conteúdo visível) */
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+}
+
+@keyframes modal-in {
+	from {
+		opacity: 0;
+		transform: translateY(12px) scale(0.98);
+	}
+}
+
+@keyframes sheet-in {
+	from {
+		opacity: 0;
+		transform: translateY(28px);
+	}
+}
+
+@keyframes pop {
+	40% {
+		transform: scale(1.25);
+	}
+}
+
+/* Aparição de seções: só é escondido o que a action `reveal` marcou via JS */
+[data-reveal] {
+	transition:
+		opacity 0.5s ease,
+		transform 0.5s var(--ease);
+}
+
+[data-reveal='pending'] {
+	opacity: 0;
+	transform: translateY(14px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-delay: 0s !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Responsividade utilitária */
+@media (max-width: 991px) {
+	.desktop-only {
+		display: none !important;
+	}
+}
+
+@media (min-width: 992px) {
+	.mobile-only {
+		display: none !important;
+	}
+}
