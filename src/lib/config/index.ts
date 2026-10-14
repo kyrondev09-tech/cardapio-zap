@@ -2,8 +2,8 @@ import type { Config } from '../types/index';
 
 export const config: Config = {
 	companyName: 'A pimenta',
-	slogan: 'Seu pastel quentinho. Seu açaí do seu jeito.',
-	description: 'Pastéis, lanches, açaí, sucos e muito mais. Monte seu pedido com facilidade.',
+	slogan: 'Seu burger artesanal, do seu jeito.',
+	description: 'Hambúrgueres artesanais, porções, bebidas e muito mais. Monte seu pedido com facilidade.',
 	whatsapp: '5500000000000', // Inválido por padrão para segurança (não abrir número real)
 	address: 'Av. 25 de Maio, Centro',
 	instagram: 'https://instagram.com/branquinholanches',
@@ -27,12 +27,11 @@ export const config: Config = {
 };
 
 export const categories: readonly string[] = [
-	'Pastéis',
-	'Coxinhas',
-	'Açaí',
-	'Sucos',
-	'Refrigerantes',
-	'Batata Frita'
+	'Burgers',
+	'Combos',
+	'Porções',
+	'Bebidas',
+	'Sobremesas'
 ];
 
 export const DEFAULT_CATEGORY = 'Tudo';

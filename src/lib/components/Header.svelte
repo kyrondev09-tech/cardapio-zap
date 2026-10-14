@@ -61,7 +61,7 @@
 				inputmode="search"
 				enterkeyhint="search"
 				autocomplete="off"
-				placeholder="Busque pastel, suco, etc..."
+				placeholder="Busque hambúrguer, bebida, etc..."
 				bind:value={searchQuery}
 				oninput={onSearchInput}
 				aria-label="Buscar produtos no cardápio"

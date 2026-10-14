@@ -1,6 +1,6 @@
 import type { CartItem, Product, StoredCartData } from '../types/index';
 
-export const CART_STORAGE_KEY = 'branquinho_cart_v1';
+export const CART_STORAGE_KEY = 'branquinho_cart_v2';
 
 /**
  * Carrega e higieniza os dados do carrinho salvos no localStorage.

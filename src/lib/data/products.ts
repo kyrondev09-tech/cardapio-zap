@@ -2,172 +2,160 @@ import type { OptionGroup, Product } from '../types/index';
 import smashBurger from '../assets/The Perfect Smash Burger on a Gas Griddle.jpg';
 
 // Fotos demonstrativas HTTPS usando Unsplash (temática aproximada para food)
-export const imgPastel = smashBurger;
-export const imgCoxinha =
-	'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=800&auto=format&fit=crop';
-export const imgAcai =
-	'https://images.unsplash.com/photo-1596649281350-137cb5b5465e?q=80&w=800&auto=format&fit=crop';
+export const imgBurger = smashBurger;
+export const imgCombo =
+	'https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=800&auto=format&fit=crop';
 export const imgSuco =
 	'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=800&auto=format&fit=crop';
 export const imgRefri =
-	'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=800&auto=format&fit=crop';
+	'https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=800&auto=format&fit=crop';
 export const imgFritas =
 	'https://images.unsplash.com/photo-1576107232684-1279f390859f?q=80&w=800&auto=format&fit=crop';
+export const imgBrownie =
+	'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=800&auto=format&fit=crop';
+export const imgMilkshake =
+	'https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=800&auto=format&fit=crop';
 
-export const addOnsPastel: OptionGroup = {
-	id: 'add-pastel',
+export const addOnsBurger: OptionGroup = {
+	id: 'add-burger',
 	name: 'Adicionais',
 	min: 0,
 	max: 3,
 	options: [
-		{ id: 'p1', name: 'Catupiry', priceAddition: 200 },
-		{ id: 'p2', name: 'Cheddar', priceAddition: 200 },
-		{ id: 'p3', name: 'Bacon', priceAddition: 350 }
+		{ id: 'b1', name: 'Cheddar extra', priceAddition: 300 },
+		{ id: 'b2', name: 'Bacon', priceAddition: 400 },
+		{ id: 'b3', name: 'Blend extra 120g', priceAddition: 800 }
+	]
+};
+
+export const comboDrink: OptionGroup = {
+	id: 'combo-drink',
+	name: 'Bebida (Obrigatório)',
+	min: 1,
+	max: 1,
+	options: [
+		{ id: 'cd1', name: 'Coca-Cola Lata 350ml', priceAddition: 0 },
+		{ id: 'cd2', name: 'Guaraná Antarctica 350ml', priceAddition: 0 },
+		{ id: 'cd3', name: 'Suco Natural', priceAddition: 100 }
 	]
 };
 
 export const products: Product[] = [
-	// Pastéis
+	// Burgers
 	{
 		id: '1',
-		categoryId: 'Pastéis',
-		name: 'Pastel de Carne',
-		description: 'Carne moída temperada.',
-		imageUrl: imgPastel,
-		basePrice: 800,
+		categoryId: 'Burgers',
+		name: 'Burger Clássico',
+		description: 'Blend artesanal de 150g, queijo prato derretido e molho especial no pão brioche.',
+		imageUrl: imgBurger,
+		basePrice: 2800,
 		available: true,
-		optionGroups: [addOnsPastel]
+		optionGroups: [addOnsBurger]
 	},
 	{
 		id: '2',
-		categoryId: 'Pastéis',
-		name: 'Pastel de Queijo',
-		description: 'Queijo mussarela derretido.',
-		imageUrl: imgPastel,
-		basePrice: 800,
+		categoryId: 'Burgers',
+		name: 'Double Cheese',
+		description: 'Dois blends de 120g, muito queijo cheddar derretido e maionese da casa.',
+		imageUrl: imgBurger,
+		basePrice: 3400,
 		available: true,
-		optionGroups: [addOnsPastel]
+		optionGroups: [addOnsBurger]
 	},
 	{
 		id: '3',
-		categoryId: 'Pastéis',
-		name: 'Pastel de Frango com Catupiry',
-		description: 'Frango desfiado com catupiry original.',
-		imageUrl: imgPastel,
-		basePrice: 900,
+		categoryId: 'Burgers',
+		name: 'Smash Bacon',
+		description: 'Dois smash de 90g, cheddar, bacon crocante e cebola caramelizada.',
+		imageUrl: imgBurger,
+		basePrice: 3200,
 		available: true,
-		optionGroups: [addOnsPastel]
+		optionGroups: [addOnsBurger]
 	},
 	{
 		id: '4',
-		categoryId: 'Pastéis',
-		name: 'Pastel de Pizza',
-		description: 'Mussarela, presunto, tomate e orégano.',
-		imageUrl: imgPastel,
-		basePrice: 900,
-		available: true,
-		optionGroups: [addOnsPastel]
-	},
-	{
-		id: '5',
-		categoryId: 'Pastéis',
-		name: 'Pastel de Calabresa',
-		description: 'Calabresa fatiada com cebola.',
-		imageUrl: imgPastel,
-		basePrice: 850,
+		categoryId: 'Burgers',
+		name: 'Chicken Crispy',
+		description: 'Filé de frango empanado, alface, tomate e maionese de ervas.',
+		imageUrl: imgBurger,
+		basePrice: 2700,
 		available: false,
-		optionGroups: [addOnsPastel]
+		optionGroups: [addOnsBurger]
 	},
 
-	// Coxinhas
+	// Combos
 	{
-		id: '6',
-		categoryId: 'Coxinhas',
-		name: 'Coxinha de Frango',
-		description: 'Massa crocante com recheio de frango.',
-		imageUrl: imgCoxinha,
-		basePrice: 700,
-		available: true
+		id: '5',
+		categoryId: 'Combos',
+		name: 'Combo Clássico',
+		description: 'Burger Clássico, batata frita individual e bebida.',
+		imageUrl: imgCombo,
+		basePrice: 3900,
+		available: true,
+		optionGroups: [comboDrink]
 	},
 	{
+		id: '6',
+		categoryId: 'Combos',
+		name: 'Combo Double Cheese',
+		description: 'Double Cheese, batata frita individual e bebida.',
+		imageUrl: imgCombo,
+		basePrice: 4500,
+		available: true,
+		optionGroups: [comboDrink]
+	},
+
+	// Porções
+	{
 		id: '7',
-		categoryId: 'Coxinhas',
-		name: 'Coxinha Frango com Catupiry',
-		description: 'O clássico frango com catupiry.',
-		imageUrl: imgCoxinha,
-		basePrice: 850,
+		categoryId: 'Porções',
+		name: 'Batata Frita Simples',
+		description: 'Batata palito frita na hora.',
+		imageUrl: imgFritas,
+		basePrice: 1500,
 		available: true
 	},
 	{
 		id: '8',
-		categoryId: 'Coxinhas',
-		name: 'Coxinha de Charque',
-		description: 'Recheio farto de charque desfiado.',
-		imageUrl: imgCoxinha,
-		basePrice: 950,
+		categoryId: 'Porções',
+		name: 'Batata com Cheddar e Bacon',
+		description: 'Porção caprichada.',
+		imageUrl: imgFritas,
+		basePrice: 2200,
 		available: true
 	},
 
-	// Açaí
+	// Bebidas
 	{
 		id: '9',
-		categoryId: 'Açaí',
-		name: 'Copo de Açaí',
-		description: 'Açaí cremoso. Monte do seu jeito.',
-		imageUrl: imgAcai,
-		basePrice: 1200,
-		available: true,
-		optionGroups: [
-			{
-				id: 'ac1',
-				name: 'Tamanho (Obrigatório)',
-				min: 1,
-				max: 1,
-				options: [
-					{ id: 't300', name: '300ml', priceAddition: 0 },
-					{ id: 't500', name: '500ml', priceAddition: 600 },
-					{ id: 't700', name: '700ml', priceAddition: 1000 }
-				]
-			},
-			{
-				id: 'ac2',
-				name: 'Acompanhamentos Grátis',
-				min: 0,
-				max: 3,
-				options: [
-					{ id: 'a1', name: 'Leite em pó', priceAddition: 0 },
-					{ id: 'a2', name: 'Leite condensado', priceAddition: 0 },
-					{ id: 'a3', name: 'Granola', priceAddition: 0 },
-					{ id: 'a4', name: 'Banana', priceAddition: 0 }
-				]
-			},
-			{
-				id: 'ac3',
-				name: 'Adicionais Extras',
-				min: 0,
-				max: 5,
-				options: [
-					{ id: 'e1', name: 'Nutella', priceAddition: 400 },
-					{ id: 'e2', name: 'Morango', priceAddition: 300 },
-					{ id: 'e3', name: 'Ouro Branco', priceAddition: 250 }
-				]
-			}
-		]
+		categoryId: 'Bebidas',
+		name: 'Coca-Cola Lata 350ml',
+		description: 'Gelada.',
+		imageUrl: imgRefri,
+		basePrice: 600,
+		available: true
 	},
 	{
 		id: '10',
-		categoryId: 'Açaí',
-		name: 'Barca de Açaí',
-		description: 'Ideal para dividir. Inclui 4 complementos.',
-		imageUrl: imgAcai,
-		basePrice: 3500,
+		categoryId: 'Bebidas',
+		name: 'Guaraná Antarctica 350ml',
+		description: 'Gelado.',
+		imageUrl: imgRefri,
+		basePrice: 600,
 		available: true
 	},
-
-	// Sucos
 	{
 		id: '11',
-		categoryId: 'Sucos',
+		categoryId: 'Bebidas',
+		name: 'Coca-Cola 2 Litros',
+		description: 'Para a família.',
+		imageUrl: imgRefri,
+		basePrice: 1400,
+		available: true
+	},
+	{
+		id: '12',
+		categoryId: 'Bebidas',
 		name: 'Suco Natural',
 		description: 'Sucos feitos da fruta na hora.',
 		imageUrl: imgSuco,
@@ -187,87 +175,37 @@ export const products: Product[] = [
 			}
 		]
 	},
-	{
-		id: '12',
-		categoryId: 'Sucos',
-		name: 'Suco com Leite',
-		description: 'Vitamina cremosa.',
-		imageUrl: imgSuco,
-		basePrice: 900,
-		available: true,
-		optionGroups: [
-			{
-				id: 's2',
-				name: 'Sabor',
-				min: 1,
-				max: 1,
-				options: [
-					{ id: 'sb4', name: 'Morango', priceAddition: 0 },
-					{ id: 'sb5', name: 'Banana', priceAddition: 0 }
-				]
-			}
-		]
-	},
 
-	// Refrigerantes
+	// Sobremesas
 	{
 		id: '13',
-		categoryId: 'Refrigerantes',
-		name: 'Coca-Cola Lata 350ml',
-		description: 'Gelada.',
-		imageUrl:
-			'https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=800&auto=format&fit=crop',
-		basePrice: 600,
+		categoryId: 'Sobremesas',
+		name: 'Brownie com Calda',
+		description: 'Brownie de chocolate meio amargo com calda quente.',
+		imageUrl: imgBrownie,
+		basePrice: 1200,
 		available: true
 	},
 	{
 		id: '14',
-		categoryId: 'Refrigerantes',
-		name: 'Guaraná Antarctica 350ml',
-		description: 'Gelado.',
-		imageUrl:
-			'https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=800&auto=format&fit=crop',
-		basePrice: 600,
-		available: true
-	},
-	{
-		id: '15',
-		categoryId: 'Refrigerantes',
-		name: 'Coca-Cola 2 Litros',
-		description: 'Para a família.',
-		imageUrl:
-			'https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=800&auto=format&fit=crop',
-		basePrice: 1400,
-		available: true
-	},
-	{
-		id: '16',
-		categoryId: 'Refrigerantes',
-		name: 'Guaraná 2 Litros',
-		description: 'Para a família.',
-		imageUrl:
-			'https://images.unsplash.com/photo-1554866585-cd94860890b7?q=80&w=800&auto=format&fit=crop',
-		basePrice: 1200,
-		available: true
-	},
-
-	// Batata Frita
-	{
-		id: '17',
-		categoryId: 'Batata Frita',
-		name: 'Porção Simples',
-		description: 'Batata palito frita na hora.',
-		imageUrl: imgFritas,
-		basePrice: 1500,
-		available: true
-	},
-	{
-		id: '18',
-		categoryId: 'Batata Frita',
-		name: 'Batata com Cheddar e Bacon',
-		description: 'Porção caprichada.',
-		imageUrl: imgFritas,
-		basePrice: 2200,
-		available: true
+		categoryId: 'Sobremesas',
+		name: 'Milkshake',
+		description: 'Cremoso, feito com sorvete de verdade.',
+		imageUrl: imgMilkshake,
+		basePrice: 1600,
+		available: true,
+		optionGroups: [
+			{
+				id: 'm1',
+				name: 'Sabor',
+				min: 1,
+				max: 1,
+				options: [
+					{ id: 'ms1', name: 'Chocolate', priceAddition: 0 },
+					{ id: 'ms2', name: 'Morango', priceAddition: 0 },
+					{ id: 'ms3', name: 'Oreo', priceAddition: 200 }
+				]
+			}
+		]
 	}
 ];

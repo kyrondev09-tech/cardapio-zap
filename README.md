@@ -74,22 +74,22 @@ Os produtos ficam em `src/lib/data/products.ts`. Exemplo:
 
 ```ts
 {
-	id: '9',
-	categoryId: 'Açaí', // precisa ser igual a um nome em `categories`
-	name: 'Copo de Açaí',
-	description: 'Açaí cremoso. Monte do seu jeito.',
-	imageUrl: imgAcai,
-	basePrice: 1200, // centavos
+	id: '14',
+	categoryId: 'Sobremesas', // precisa ser igual a um nome em `categories`
+	name: 'Milkshake',
+	description: 'Cremoso, feito com sorvete de verdade.',
+	imageUrl: imgMilkshake,
+	basePrice: 1600, // centavos
 	available: true, // false mostra o item como "Esgotado"
 	optionGroups: [
 		{
-			id: 'ac1',
+			id: 'm1',
 			name: 'Tamanho (Obrigatório)',
 			min: 1, // quantas opções o cliente precisa escolher
 			max: 1, // quantas pode escolher
 			options: [
 				{ id: 't300', name: '300ml', priceAddition: 0 },
-				{ id: 't500', name: '500ml', priceAddition: 600 }
+				{ id: 't500', name: '500ml', priceAddition: 400 }
 			]
 		}
 	]
