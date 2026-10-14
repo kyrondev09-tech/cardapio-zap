@@ -1,8 +1,8 @@
 import type { OptionGroup, Product } from '../types/index';
+import smashBurger from '../assets/The Perfect Smash Burger on a Gas Griddle.jpg';
 
 // Fotos demonstrativas HTTPS usando Unsplash (temática aproximada para food)
-export const imgPastel =
-	'https://images.unsplash.com/photo-1628840042765-356cda07504e?q=80&w=800&auto=format&fit=crop';
+export const imgPastel = smashBurger;
 export const imgCoxinha =
 	'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80&w=800&auto=format&fit=crop';
 export const imgAcai =
