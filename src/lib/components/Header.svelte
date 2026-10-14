@@ -219,6 +219,7 @@
 	}
 
 	.status-badge {
+		white-space: nowrap;
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
@@ -343,7 +344,7 @@
 	}
 
 	/* No celular a busca desce para uma segunda linha do cabeçalho */
-	@media (max-width: 720px) {
+	@media (max-width: 860px) {
 		.header-content {
 			grid-template-columns: minmax(0, 1fr) auto;
 			grid-template-areas:

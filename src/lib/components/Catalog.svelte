@@ -34,10 +34,55 @@
 	});
 
 	let barEl = $state<HTMLElement | null>(null);
+	let scrollEl = $state<HTMLElement | null>(null);
 	let contentEl = $state<HTMLElement | null>(null);
 
-	function selectCategory(category: string) {
+	// Indica com um esmaecido nas bordas que há mais categorias para os lados
+	let moreLeft = $state(false);
+	let moreRight = $state(false);
+
+	function updateScrollHints() {
+		if (!scrollEl) return;
+		const { scrollLeft, clientWidth, scrollWidth } = scrollEl;
+		moreLeft = scrollLeft > 4;
+		moreRight = scrollLeft + clientWidth < scrollWidth - 4;
+	}
+
+	$effect(() => {
+		const el = scrollEl;
+		if (!el) return;
+
+		updateScrollHints();
+		const observer = new ResizeObserver(updateScrollHints);
+		observer.observe(el);
+
+		// Com mouse (sem toque), a roda rola as categorias para os lados enquanto houver o que rolar
+		function onWheel(event: WheelEvent) {
+			if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+			const max = el!.scrollWidth - el!.clientWidth;
+			const next = Math.min(max, Math.max(0, el!.scrollLeft + event.deltaY));
+			if (next === el!.scrollLeft) return;
+			event.preventDefault();
+			el!.scrollLeft = next;
+		}
+		el.addEventListener('wheel', onWheel, { passive: false });
+
+		return () => {
+			observer.disconnect();
+			el.removeEventListener('wheel', onWheel);
+		};
+	});
+
+	function selectCategory(category: string, chip?: HTMLElement) {
 		selectedCategory = category;
+		// Traz a categoria escolhida para o centro da barra
+		if (scrollEl && chip) {
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			scrollEl.scrollTo({
+				left: chip.offsetLeft - scrollEl.offsetLeft - (scrollEl.clientWidth - chip.offsetWidth) / 2,
+				behavior: reduceMotion ? 'auto' : 'smooth'
+			});
+		}
 		// Se a lista já rolou para trás da barra de categorias, volta ao início dela
 		if (
 			barEl &&
@@ -60,26 +105,44 @@
 	</div>
 
 	<div class="categories-bar" bind:this={barEl}>
-		<div class="categories-scroll" role="group" aria-label="Categorias do cardápio">
+		<div
+			class="flex touch-pan-x [scrollbar-width:none] items-center gap-2 overflow-x-auto overflow-y-hidden overscroll-x-contain px-1 pt-3 pb-2 whitespace-nowrap select-none [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
+			role="group"
+			aria-label="Categorias do cardápio"
+			bind:this={scrollEl}
+			onscroll={updateScrollHints}
+		>
 			<button
 				type="button"
-				class="chip"
+				class="chip shrink-0 transition-[background-color,border-color,color,scale] duration-200 active:scale-95"
 				aria-pressed={selectedCategory === 'Tudo'}
-				onclick={() => selectCategory('Tudo')}
+				onclick={(event) => selectCategory('Tudo', event.currentTarget)}
 			>
 				Tudo
 			</button>
 			{#each categories as cat (cat)}
 				<button
 					type="button"
-					class="chip"
+					class="chip shrink-0 transition-[background-color,border-color,color,scale] duration-200 active:scale-95"
 					aria-pressed={selectedCategory === cat}
-					onclick={() => selectCategory(cat)}
+					onclick={(event) => selectCategory(cat, event.currentTarget)}
 				>
 					{cat}
 				</button>
 			{/each}
 		</div>
+		<div
+			class="pointer-events-none absolute inset-y-0 left-0 w-8 bg-linear-to-r from-(--bg) to-transparent transition-opacity duration-200 {moreLeft
+				? 'opacity-100'
+				: 'opacity-0'}"
+			aria-hidden="true"
+		></div>
+		<div
+			class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-linear-to-l from-(--bg) to-transparent transition-opacity duration-200 {moreRight
+				? 'opacity-100'
+				: 'opacity-0'}"
+			aria-hidden="true"
+		></div>
 	</div>
 
 	<div class="catalog-content" aria-live="polite" bind:this={contentEl}>
@@ -166,20 +229,7 @@
 		border-bottom: 1px solid var(--border);
 	}
 
-	.categories-scroll {
-		display: flex;
-		gap: 8px;
-		overflow-x: auto;
-		padding: 12px 4px;
-		scrollbar-width: none;
-	}
-
-	.categories-scroll::-webkit-scrollbar {
-		display: none;
-	}
-
 	.chip {
-		flex: none;
 		min-height: 40px;
 		padding: 8px 16px;
 		background: var(--surface);
@@ -188,10 +238,6 @@
 		white-space: nowrap;
 		font-weight: 600;
 		color: var(--text-light);
-		transition:
-			background-color 0.2s,
-			border-color 0.2s,
-			color 0.2s;
 	}
 
 	.chip[aria-pressed='true'] {

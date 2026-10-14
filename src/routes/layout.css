@@ -11,6 +11,8 @@
 	--border: #2e2b28;
 	--border-strong: #5c574f;
 
+	--hero-bg: #0f0f11; /* fundo do banner principal */
+
 	/* Texto */
 	--text: #f6f1e7;
 	--text-light: #b8afa1;
@@ -50,7 +52,7 @@
 }
 
 /* Cabeçalho com duas linhas (marca + busca) em telas estreitas */
-@media (max-width: 720px) {
+@media (max-width: 860px) {
 	:root {
 		--header-h: 119px;
 	}
@@ -71,30 +73,33 @@ body {
 	padding-bottom: env(safe-area-inset-bottom);
 }
 
-* {
-	box-sizing: border-box;
-}
+/* Resets ficam na camada base para que as utilitárias do Tailwind consigam sobrescrevê-los */
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
 
-h1,
-h2,
-h3,
-h4,
-p {
-	margin: 0;
-}
+	h1,
+	h2,
+	h3,
+	h4,
+	p {
+		margin: 0;
+	}
 
-button {
-	font-family: inherit;
-	cursor: pointer;
-	border: none;
-	background: none;
-	color: inherit;
-}
+	button {
+		font-family: inherit;
+		cursor: pointer;
+		border: none;
+		background: none;
+		color: inherit;
+	}
 
-input,
-textarea,
-select {
-	font-family: inherit;
+	input,
+	textarea,
+	select {
+		font-family: inherit;
+	}
 }
 
 :focus-visible {
